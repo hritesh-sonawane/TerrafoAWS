@@ -40,3 +40,8 @@ resource "aws_route" "default_route" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.tf_igw.id
 }
+
+resource "aws_route_table_association" "tf_public_assoc" {
+  subnet_id      = aws_subnet.tf_public_subnet.id
+  route_table_id = aws_route_table.tf_public_rt.id
+}
