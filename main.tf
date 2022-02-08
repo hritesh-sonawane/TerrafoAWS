@@ -45,3 +45,22 @@ resource "aws_route_table_association" "tf_public_assoc" {
   subnet_id      = aws_subnet.tf_public_subnet.id
   route_table_id = aws_route_table.tf_public_rt.id
 }
+
+resource "aws_security_group" "tf_sg" {
+  name        = "public_sg"
+  description = "public security group"
+  vpc_id      = aws_vpc.tf_vpc.id
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] //insert your ip
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
