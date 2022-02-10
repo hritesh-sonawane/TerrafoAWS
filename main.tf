@@ -64,3 +64,8 @@ resource "aws_security_group" "tf_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_key_pair" "tf_auth" {
+  key_name   = "tfkey"
+  public_key = file("~/.ssh/tfkey.pub") // file is a tf fn
+}
